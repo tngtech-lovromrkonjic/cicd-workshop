@@ -43,12 +43,8 @@ jobs:
         check_name: 'JUnit Tests'
         require_tests: true       # fail if no tests found
         annotate_only: false
-  tag:
-    if: ${{ github.event.inputs.version != '' }}
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
     - name: Create and push tag
+      if: ${{ github.event.inputs.version != '' }}
       run: |
         VERSION="${{ github.event.inputs.version }}"
         
