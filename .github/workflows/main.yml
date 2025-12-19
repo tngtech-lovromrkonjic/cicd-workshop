@@ -30,3 +30,11 @@ jobs:
       run: yarn build
     - name: Integration tests
       run: yarn test:e2e
+    - name: Publish JUnit test report
+      uses: mikepenz/action-junit-report@v5
+      if: success() || failure() # always run even if tests fail
+      with:
+        report_paths: '**/reports/**/*.xml'
+        check_name: 'JUnit Tests'
+        require_tests: true       # fail if no tests found
+        annotate_only: false
